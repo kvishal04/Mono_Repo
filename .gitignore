@@ -26,7 +26,6 @@ build/
 .out/
 .next/
 .vercel/
-server/
 coverage/
 
 # Database files
