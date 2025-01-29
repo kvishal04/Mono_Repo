@@ -1,0 +1,65 @@
+/* Import Tailwind CSS base, components, and utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+:root {
+    /* Primary Colors */
+    --primary-color: #ffffff;
+    --background-color: #f0f0f0;
+    --text-color: #000000;
+
+    /* Secondary Colors */
+    --secondary-color: #000000;
+    --secondary-text-color: #ffffff;
+
+    /* Red Shades */
+    --red: #ff0000;
+    --red-light: #ff6666;
+    --red-dark: #b20000;
+
+    /* Blue Shades */
+    --blue: #0000ff;
+    --blue-light: #6666ff;
+    --blue-dark: #0000b2;
+
+    /* Green Shades */
+    --green: #00ff00;
+    --green-light: #66ff66;
+    --green-dark: #00b200;
+
+    /* Orange Shades */
+    --orange: #ffa500;
+    --orange-light: #ffc966;
+    --orange-dark: #cc8400;
+
+    /* Yellow Shades */
+    --yellow: #ffff00;
+    --yellow-light: #ffff66;
+    --yellow-dark: #b2b200;
+
+    /* Purple Shades */
+    --purple: #800080;
+    --purple-light: #d580d5;
+    --purple-dark: #4d004d;
+
+    /* Gray Shades */
+    --gray: #808080;
+    --gray-light: #d3d3d3;
+    --gray-dark: #4d4d4d;
+
+    /* Additional Colors */
+    --hover-background-color: #e5e5e5;
+    --hover-text-color: #333333;
+
+    --black: #000000;
+    --white: #ffffff
+}
+
+
+
