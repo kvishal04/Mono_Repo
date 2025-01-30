@@ -6,6 +6,7 @@ import { JWTSECRET } from "../secrets";
 import { BadRequestException } from "../exceptions/bad-request";
 import { ErrorCode } from "../exceptions/root";
 import { tryCatchHandler } from "../middlewares/asyncHandler";
+import { SuccessCode, successResponce } from "../middlewares/successResponce";
 
 
 export const login = tryCatchHandler(async (req: Request, res: Response, next: NextFunction) => {
@@ -20,7 +21,6 @@ export const login = tryCatchHandler(async (req: Request, res: Response, next: N
         if(!user){
             // find user
             throw new BadRequestException('User does not exist', ErrorCode.USER_NOT_FOUND);
-            
         }
     
        
@@ -34,7 +34,7 @@ export const login = tryCatchHandler(async (req: Request, res: Response, next: N
             user
         }, JWTSECRET , { expiresIn: '8h' });
         
-        return res.status(200).json({token,  user: {id: user.id, name: user.name, email: user.email}})
+        return successResponce(req, res, 'User login successfully', SuccessCode.SUSSESSFUL, {token,  user: {id: user.id, name: user.name, email: user.email}})
 })
 
 export const signup = tryCatchHandler(
@@ -61,7 +61,8 @@ export const signup = tryCatchHandler(
                 password: hashSync(password, 10)
             }
         })
-        return res.status(200).json(user) 
+
+        return successResponce(req, res, 'User created successfully', SuccessCode.CREATED, user)
     }
 )  
 

@@ -41,6 +41,8 @@ export const authUser = tryCatchHandler(async (req: Request, res: Response, next
     req.user = user;
     next();
   } catch (error) {
+    console.log("error",error);
+    
     throw new InternalException("Invalid or Expired Token", ErrorCode.INVALID_AUTH_TOKEN);
   }
 });

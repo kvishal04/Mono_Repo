@@ -7,6 +7,6 @@ import { authAdmin } from '../middlewares/admin'
 
 const rootRouter: Router = Router()
 rootRouter.use('/auth', authRoutes)
-rootRouter.use('/products', [authUser, authAdmin], productsRoute)
+rootRouter.use('/products', [authUser], productsRoute)
 
 export default rootRouter

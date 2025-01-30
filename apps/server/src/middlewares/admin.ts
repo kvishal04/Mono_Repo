@@ -20,7 +20,7 @@ export const authAdmin = tryCatchHandler(async (req: Request, res: Response, nex
     console.log("req.user.role",req.user.role);
     
     if(req.user.role !== 'ADMIN'){
-        throw new BadRequestException("Wrong  !", ErrorCode.INVALID_USER)
+        throw new BadRequestException("Invalid User!", ErrorCode.INVALID_USER)
     }
     next();
 });
