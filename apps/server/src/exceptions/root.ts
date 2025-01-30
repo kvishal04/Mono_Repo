@@ -27,4 +27,5 @@ export enum ErrorCode {
     INVALID_AUTH_TOKEN = 40001,
     INVALID_USER = 50001,
     PRODUCT_NOT_FOUND = 2001,
+    ADDRESS_NOT_FOUND = 3001,
 }

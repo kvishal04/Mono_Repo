@@ -15,7 +15,10 @@ export const login = tryCatchHandler(async (req: Request, res: Response, next: N
         let user  =  await prismaClient.user.findFirst({
             where: {
                 email
-            }
+            },
+            include: {
+                addresses: true,
+            },
         })
     
         if(!user){
