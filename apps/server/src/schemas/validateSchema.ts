@@ -27,7 +27,5 @@ export const validate = tryCatchHandler(async (req: Request, res: Response, next
 
 
   // Return a 400 response with validation error messages
-
-  console.log("JSON.stringify(extractedErrors)", JSON.stringify(extractedErrors))
   next( new BadRequestException("UNPROCESSABLE_ENTITY", ErrorCode.UNPROCESSABLE_ENTITY, extractedErrors))
 });

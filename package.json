@@ -5,13 +5,12 @@
   "main": "index.js",
   "workspaces": {
     "packages": [
-      "apps/*",
-      "package/*"
+      "apps/*"
     ]
   },
   "packageManager": "npm@10.8.1",
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build --filter=client",
     "start": "turbo run start",
     "test": "turbo run test",
     "lint": "turbo run lint"
