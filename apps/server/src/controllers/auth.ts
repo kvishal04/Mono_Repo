@@ -43,7 +43,6 @@ export const login = tryCatchHandler(async (req: Request, res: Response, next: N
 export const signup = tryCatchHandler(
     async (req: Request, res: Response, next: NextFunction) => {
 
-
         const { email, name, password} = req.body; 
         let user  =  await prismaClient.user.findUnique({
             where: {
@@ -68,6 +67,12 @@ export const signup = tryCatchHandler(
         return successResponce(req, res, 'User created successfully', SuccessCode.CREATED, user)
     }
 )  
+
+export const updateUser = tryCatchHandler(
+    async (req: Request, res: Response, next: NextFunction)=>{
+    
+    // const 
+})
 
 
 

@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction, json } from 'express';
-import { validationResult, ValidationError, FieldValidationError } from 'express-validator'; // Assuming you're using express-validator
+import { Request, Response, NextFunction } from 'express';
+import { validationResult  } from 'express-validator'; // Assuming you're using express-validator
 import { BadRequestException } from '../exceptions/bad-request';
 import { ErrorCode } from '../exceptions/root';
 import { tryCatchHandler } from '../middlewares/asyncHandler';
