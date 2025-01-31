@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection, provide } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { PreloadAllModules, provideRouter, withPreloading, withRouterConfig } from '@angular/router';
 import { routes } from './app.routes';
 import { ToastrModule } from 'ngx-toastr';
@@ -17,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimations(),
     importProvidersFrom(ToastrModule.forRoot()), 
-    provide(LocationStrategy, { useClass: HashLocationStrategy }) // Providing HashLocationStrategy
+    { provide: LocationStrategy, useClass: HashLocationStrategy } // Correct way to provide LocationStrategy
   ]
 };
