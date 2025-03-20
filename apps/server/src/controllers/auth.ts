@@ -37,7 +37,7 @@ export const login = tryCatchHandler(async (req: Request, res: Response, next: N
             user
         }, JWTSECRET , { expiresIn: '8h' });
         
-        return successResponce(req, res, 'User login successfully', SuccessCode.SUSSESSFUL, {token,  user})
+        return successResponce(req, res, 'User login successfully', SuccessCode.SUCCESSFUL, {token,  user})
 })
 
 export const signup = tryCatchHandler(
@@ -60,7 +60,7 @@ export const signup = tryCatchHandler(
             data :  {
                 name,
                 email,
-                password: hashSync(password, 10)
+                password: hashSync(password, 10),
             }
         })
 

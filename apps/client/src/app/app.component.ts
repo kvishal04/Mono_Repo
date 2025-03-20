@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
+import { ThemeService } from './services/theme.service';
 
 
 @Component({
@@ -13,8 +14,13 @@ import { initFlowbite } from 'flowbite';
 })
 export class AppComponent implements OnInit {
   title = 'angualar_18';
+
+  constructor(private theme: ThemeService){
+
+  }
   
   ngOnInit(): void {
     initFlowbite();
+    this.theme.loadTheme()
   }
 }

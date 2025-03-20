@@ -11,6 +11,6 @@ export const successResponce = (req: Request, res:Response , message: string , s
 export enum SuccessCode {
    CREATED = 201,
    UPDATED = 203,
-   SUSSESSFUL = 200,
+   SUCCESSFUL = 200,
    DELETED = 203
 }

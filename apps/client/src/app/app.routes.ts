@@ -1,19 +1,25 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/auth/login/login.component';
-import { ForgotComponent } from './components/auth/forgot/forgot.component';
+import { LoginComponent } from './Pages/auth/admin-login/login.component';
+import { ForgotComponent } from './Pages/auth/forgot/forgot.component';
+import { HomeLoginComponent } from './Pages/auth/home-login/home-login.component';
+import { RegistrationComponent } from './Pages/auth/registration/registration.component';
 
 
 export const routes: Routes = [
 
     {
-        path: 'admin',
+        path: '',
         loadChildren: () =>
           import('./routes/admin/admin.routes').then((m) => m.adminRoutes),
     },
 
     {
-        path: 'login',
+        path: 'admin-login',
         component: LoginComponent
+    },
+    {
+        path: 'login',
+        component: HomeLoginComponent
     },
 
     {
@@ -23,11 +29,11 @@ export const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'admin'
+        redirectTo: ''
     },
     {
         path: '**',
         pathMatch: 'full',
-        redirectTo: 'home'
+        redirectTo: 'login'
     },
 ];

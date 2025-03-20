@@ -72,13 +72,13 @@ export const getProductList = tryCatchHandler(async (req: Request, res: Response
     })
 
     const product = await prismaClient.product.findMany({
-        skip: currentPage ? ((currentPage - 1) * 5 ): 0,
+        skip: currentPage ? ((currentPage - 1) * 10 ): 0,
         take: limit,
         where: { deletedAt : null }
     });
 
     if (!product) throw new BadRequestException('Product not Found', ErrorCode.PRODUCT_NOT_FOUND);
-    return successResponce(req, res, 'Products Fetched successfully', SuccessCode.SUSSESSFUL, {
+    return successResponce(req, res, 'Products Fetched successfully', SuccessCode.SUCCESSFUL, {
         totalPages:  limit > 0 ? Math.ceil(count / limit) : 1,
         currentPage,
         firstPage: 1,
@@ -94,6 +94,6 @@ export const getProduct = tryCatchHandler(async (req: Request, res: Response) =>
     });
 
     if (!product) throw new BadRequestException('Product not Found', ErrorCode.PRODUCT_NOT_FOUND);
-    return successResponce(req, res, 'Products Fetched successfully', SuccessCode.SUSSESSFUL, product)
+    return successResponce(req, res, 'Products Fetched successfully', SuccessCode.SUCCESSFUL, product)
 
 });

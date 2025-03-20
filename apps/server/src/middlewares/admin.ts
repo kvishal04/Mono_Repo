@@ -17,7 +17,6 @@ export const authAdmin = tryCatchHandler(async (req: Request, res: Response, nex
     if (!req.user) {
       throw new BadRequestException("User does not exist", ErrorCode.USER_NOT_FOUND);
     }
-    console.log("req.user.role",req.user.role);
     
     if(req.user.role !== 'ADMIN'){
         throw new BadRequestException("Invalid User!", ErrorCode.INVALID_USER)

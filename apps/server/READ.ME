@@ -1,3 +1,11 @@
 
 ## Prisma Database open Commands
 npx prisma studio 
+
+Database	Migration Command
+MySQL	npx prisma migrate dev --schema=prisma/mysql.prisma --name init
+MongoDB	npx prisma db push --schema=prisma/mongo.prisma
+
+After applying migrations, regenerate Prisma clients for both databases:
+npx prisma generate --schema=prisma/mysql.prisma
+npx prisma generate --schema=prisma/mongo.prisma

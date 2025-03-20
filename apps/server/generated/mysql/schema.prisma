@@ -1,0 +1,203 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
+  output          = "../generated/mysql"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+  COMPANY
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHERS
+}
+
+// ------------------------------------USER ---------------------------------
+model User {
+  id                      Int                  @id @default(autoincrement())
+  name                    String
+  email                   String               @unique
+  password                String
+  role                    Role                 @default(USER)
+  gender                  Gender               @default(MALE)
+  contactNumber           BigInt?
+  smsNotificationActive   Boolean              @default(true)
+  emailNotificationActive Boolean              @default(false)
+  userImage               String?
+  createdAt               DateTime             @default(now())
+  updatedAt               DateTime             @default(now())
+  deletedAt               DateTime?
+  addresses               Address?
+  userlogs                UserLog[]
+  educationdeatil         education_Detail[]
+  seekerProfile           seeker_Profile?
+  seekerSkill             Seeker_Skill_Sets[]
+  experienceDetails       Experience_Deatils[]
+
+  @@map("users")
+}
+
+model UserLog {
+  id               Int      @id @default(autoincrement())
+  lastLoginDate    DateTime @default(now())
+  lastJobApplyDate DateTime @default(now())
+  userId           Int
+  user             User     @relation(fields: [userId], references: [id])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now())
+
+  @@map("userLogs")
+}
+
+model Address {
+  id        Int       @id @default(autoincrement())
+  lineOne   String
+  lineTwo   String?
+  city      String
+  country   String
+  pincode   String
+  userId    Int       @unique
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  @@map("addresses")
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String    @db.Text
+  price       Decimal
+  tags        String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
+  deletedAt   DateTime?
+
+  @@map("products")
+}
+
+// ------------------------------------ Company  ---------------------------------
+
+model Buissness_Stream {
+  id                 Int               @id @default(autoincrement())
+  buisnessStreamName String
+  company_profiles   Company_Profile[]
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @default(now())
+  deletedAt          DateTime?
+
+  @@map("buisnessStreams")
+}
+
+model Company_Profile {
+  id                 Int              @id @default(autoincrement())
+  companyName        String
+  profileDescription String
+  buisnessStreamID   Int
+  buisnessStream     Buissness_Stream @relation(fields: [buisnessStreamID], references: [id])
+  companyWebsitUrl   String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @default(now())
+  deletedAt          DateTime?
+
+  @@map("companyProfiles")
+}
+
+// ------------------------------------ Profiel Seeker  ---------------------------------
+
+model education_Detail {
+  id                    Int       @id @default(autoincrement())
+  certificateDegreeName String
+  IntitutionName        String
+  startingDate          DateTime
+  completionDate        DateTime
+  percentage            Float
+  cgpa                  Float
+  userAccount           Int
+  user                  User      @relation(fields: [userAccount], references: [id])
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @default(now())
+  deletedAt             DateTime?
+
+  @@map("educationDetails")
+}
+
+model seeker_Profile {
+  id               Int       @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  currentSalary    Float
+  isAnnullyMonthly Boolean   @default(false) // by default monthly
+  userAccount      Int       @unique
+  user             User      @relation(fields: [userAccount], references: [id])
+  currency         String
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @default(now())
+  deletedAt        DateTime?
+
+  @@map("seekerProfiles")
+}
+
+//------------------------------ Seeker Skill set-------------------------
+
+model SkillSet {
+  id           Int                 @id @default(autoincrement())
+  skillSetName String
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @default(now())
+  deletedAt    DateTime?
+  skillSet     Seeker_Skill_Sets[]
+
+  @@map("skillSets")
+}
+
+model Seeker_Skill_Sets {
+  id          Int       @id @default(autoincrement())
+  skillSetId  Int
+  skill       SkillSet  @relation(fields: [skillSetId], references: [id])
+  userAccount Int
+  user        User      @relation(fields: [userAccount], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
+  deletedAt   DateTime?
+
+  @@map("seekerSkillSets")
+}
+
+// --------- Seeker Experience Details
+
+model Experience_Deatils {
+  id           Int       @id @default(autoincrement())
+  userAccount  Int
+  user         User      @relation(fields: [userAccount], references: [id])
+  isCurrentJob Boolean   @default(false)
+  startDate    DateTime
+  endDate      DateTime?
+  companyName  String
+  jobTitle     String
+  description  String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @default(now())
+  deletedAt    DateTime?
+
+  @@map("experienceDetails")
+}
+
+// ------------------3. Posting and Looking Up Jobs-----------------------------------

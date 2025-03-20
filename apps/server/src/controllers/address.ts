@@ -74,7 +74,7 @@ export const getAddressList = tryCatchHandler(async (req: Request, res: Response
     });
 
     if (!address) throw new BadRequestException('Address not Found', ErrorCode.ADDRESS_NOT_FOUND);
-    return successResponce(req, res, 'Addresses Fetched successfully', SuccessCode.SUSSESSFUL, {
+    return successResponce(req, res, 'Addresses Fetched successfully', SuccessCode.SUCCESSFUL, {
         totalPages:  limit > 0 ? Math.ceil(count / limit) : 1,
         currentPage,
         firstPage: 1,
@@ -90,6 +90,6 @@ export const getAddress = tryCatchHandler(async (req: Request, res: Response) =>
     });
 
     if (!address) throw new BadRequestException('Product not Found', ErrorCode.ADDRESS_NOT_FOUND);
-    return successResponce(req, res, 'Address Fetched successfully', SuccessCode.SUSSESSFUL, address)
+    return successResponce(req, res, 'Address Fetched successfully', SuccessCode.SUCCESSFUL, address)
 
 });
